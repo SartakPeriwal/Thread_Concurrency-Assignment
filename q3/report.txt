@@ -1,0 +1,23 @@
+In this question we need to create semaphores for all the number of cabs available in pool one and in pool2,premier, empty,
+And mutex locks to check when we update values in arrays of cabs and psasengers
+
+structure for riders drivers servers payment;
+we keep pointers for the details of the ride;
+
+If request comes for pool we first check pool1 and see if there are running cabs for the same and if so we put a lock and then process values sending post request to pool2 and wait request to pool1 this way we check if their are already running cabs if not then we check empty cabs and check if there are any available, we send post request to pool1 and wait to empty ;
+If their are no cabs avalable we use clock to check for any cabs using (sem_timedwait(&sem_t semaphore, &tm)) here it waits until the semaphore has some value 
+returns -1 if exits because of timeout with repect to tm;
+Similarly for premier we check if there are any empty cabs available if so we send post request to premier cabs and wait request to empty cabs and print whenever the number of cabs are greater than present showing that cabs are available now 
+we store the cab number as present driver to get output of the current number of and whenever we access the cabtype we put a mutex lock for the drivers when done with the accessing passengers the lcok is opened ;
+payment for the rides are made with all the servers available and a sleeptime of some time is provided
+we check if payment servers are all busy or not then we put a mutex lock to store progress of number of servers used or are available
+we store all the details of the rider and if one of them finishes the total ride we print if the 
+riderinformation passed in an 2d array 
+Threads for the passengers and for the servers of payment functions that are passed are booking cab and payment.
+Finally we join all the threads
+
+NOTE-enter all input data sorted;
+
+arrival time of first person is < arrival time of second person and so on
+
+

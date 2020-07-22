@@ -1,0 +1,46 @@
+Q2
+
+In this question we have M robots, all are threads and an array for the number of robots who have been used to make the biryani vessels. which are generated randomly
+Now all the N tables are placed in a queue On which we apply a mutex lock which allows robots to load biryani vessel we do so as only one robot shoud fill the given vessel and we increment the queue to see  if the given number of tables are empty or not 
+We apply another mutexlock to keep filling the students in the slots so that only one of the students sit
+once all the students are done with we print all the given values of robots,tables, students;
+wherever possible we print values of the number of students.
+All the students are threads which wait for slots under mutex locks
+The functions are queue for push, pop for students,table etc.
+biryani to serve is when the given robots are loading on a given table.
+and if biryani is loaded the students can come and sit on the slots till there are available ..
+Once the slots are over the next table is brought into consideration
+If no slots are available we wait for the students to wait till a slot is available in any table keeping a lock
+we push all the studnets and tables as per availability 
+
+A small explanation of implementation of the written functions
+
+push,pop,isempty();
+functions for all the different objects are standard queue functions implemented using an array of huge length to avoid reallocating space
+
+void * ready_to_serve
+
+in this funciton we generate randomly all the numbers that are required to be generated using rand() function which then when applied mod with suitable values gives the correct range required;
+
+till all the vessels are not over the robot keeps loading the vessels also we have a queue of the tables available to be filled with vessels which takes care of the given funcitonality there is a mutex lock to ensure that no 2 robots fill in the same table;
+ and create threads for the tables which fill the students in their tables till the students are not finished or the slots(generated randomly are not finished)
+
+ wait_for_slot
+
+ this takes care that all the students that are threads do not sit in the same slot on the  table we put a mutex lock while filling students onto the given slots;
+
+ready to serve_table;
+
+this function serves students till all students have not been served 
+Till the number of students that can be feeded with single vessel are eating the slots are reduced and the given function pops the students from the given total
+
+thread creation done when the robots are making and filling the biryani onto the tables and when the students are filling up slots on the table;
+
+every time the student comes with a delay 
+the total is increased in the total tally and every time a student exits the same thing is also printed.
+
+
+Error handling done while destroying and initializing mutex_locks
+
+NOTE-:
+If something which should have been printed but is not being printed is mainly because the variable are local and cannot be accessed in some other function.

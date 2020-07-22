@@ -1,0 +1,59 @@
+Q1
+
+In this question we need to compare the output time of quicksort with concurrent processes, threaded implementations,
+For quicksort we make a partition function which generates a random number as the pivot it also returns the correct value for the fastest sort.
+For quicksort in concurrent processes we fork the process and then wait for it to return control to the given parent 
+and then open another fork for the process to sort the right side of the pivot.
+
+For threaded quicksort we make 2 threads concurrently and pass arguments for the left side and right side of the pivot
+and then we join the 2 threads .
+Finally we use the clock to find output time of the given functions respectively and print the required data
+
+The most time taken is by concurrent process quick sort as there are a lot of context switches,
+the program crashes for n~100000 as the number of threads are too many and gives segmentation fault for n~1000000
+
+explaination of code snippets
+
+
+
+Partition function runs on the basic algorithm that
+we start from the leftmost element and keep track of index of smaller (or equal to) elements as i. While traversing, if we find a smaller element, we swap current element with arr[i]. Otherwise we ignore current element. Here the element i is chosen randomly using rand();
+
+
+quicksort concurrent_processes
+
+instead of calling both the functions of the recursive quicksort we call them one by one in different processes which basically is done to have concurrent processes
+pid_t pid1 =fork();
+        if(!pid1)
+{
+                quicksort_concurrent(arr,start,pivot-1);
+                            exit(1);
+                                    
+}
+        else if(pid1>=1)
+{
+                pid_t pid2 = fork();
+                            if(!pid2)   
+                                /* code similar to first fork*/
+}
+
+
+
+quicksort concurrent_threads
+
+it is similar to the concurrent processes but here we make 2 threads and have functions of the type void * we pass arguments of the form void * in the given function and then create parameters in structures
+
+example 
+struct argument * argument1 =(struct argument *)malloc(sizeof(struct argument));
+argument1->end=pivot-1;
+argument1->structurearray =arr;
+argument1->start=start;
+
+
+then we create 2 threads for both the left and right sorting :
+
+using the clock function as mentioned in the tutorial codes provided;
+we get to know that the fastest in the 3 is normal quicksort and the slowest is the concurrent_process_quicksort as their are many context switches
+
+
+
